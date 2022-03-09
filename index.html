@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <title>Noticias</title>
+</head>
+
+<body>
+    <div class="container-fluid mt-1 mb-1">
+        <div class="row pb-1">
+            <!--nav das tabs-->
+            <div class="col-9 pe-0">
+                <ul class="nav nav-tabs gap-1" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="produtos-tab" data-bs-toggle="tab"
+                            data-bs-target="#produtos" type="button" role="tab" aria-controls="produtos"
+                            aria-selected="true" style="height: 35px">
+                            Produtos
+                        </button>
+                    </li>
+                    <li class="nav-item bg-opacity-75 bg-white rounded-top" role="presentation">
+                        <button class="nav-link text-black" id="historico-tab" data-bs-toggle="tab"
+                            data-bs-target="#historico" type="button" role="tab" aria-controls="historico"
+                            aria-selected="false" style="height: 35px">
+                            Histórico
+                        </button>
+                    </li>
+                </ul>
+                <!--conteudo das tabs-->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                        <div class="bg-white mb-1" style="height: 480px">
+                            <table class="table  table-borderless bg-white  ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Nome do produto</th>
+                                        <th scope="col" class="col-2">Valor do produto</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="corpoTabela">
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="historico" role="tabpanel" aria-labelledby="historico-tab"></div>
+                </div>
+            </div>
+            <!--logo e resumo da compra-->
+            <div class="col">
+                <div class="d-flex justify-content-center text-center px-4 py-1" height="200px">
+                    <img class="rounded-circle" width="133px"
+                        src="https://img.elo7.com.br/product/original/3A9F8F6/quadro-logomarca-logomarca.jpg" />
+                </div>
+                <div id="resumoDeCompra" class="bg-white pt-2 px-2 mt-2" style="height: 365px">
+                    <span>Resumo da Compra</span>
+                    <div class="input-group input-group-sm mb-2 d-inline-block">
+                        <span>Subtotal</span>
+
+                        <input type="text" id="inputSubTotal" class="form-control w-100"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly />
+                    </div>
+                    <div class="input-group input-group-sm mb-2 d-inline-block">
+
+                        <span>Desconto</span>
+
+                        <input type="text" class="form-control w-100 ps-4" value="0" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" readonly />
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-fill" viewBox="0 0 16 16" onclick="troco('desconto')">
+                            <path
+                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+
+
+                    </div>
+                    <div class="input-group input-group-sm mb-2 d-inline-block">
+                        <span>Total</span>
+                        <input type="text" class="form-control w-100" id="inputTotal" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" readonly />
+                    </div>
+                    <div class="input-group input-group-sm mb-2 d-inline-block">
+                        <span>Pago</span>
+                        <input type="text" class="form-control w-100 ps-4" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" readonly />
+                        <svg xmlns="http://www.w3.org/2000/svg" id="editarValorPago" width="16" height="16"
+                            fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16" onclick="troco('troco')">
+                            <path
+                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                    </div>
+                    <div class="input-group input-group-sm d-inline-block">
+                        <span>Troco</span>
+                        <input type="text" class="form-control w-100" value="0" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" readonly />
+                        <span id="erroTroco"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--grupo botôes para finalizar compra -->
+        <div class="row bg-white me-0 ms-0 align-items-center" style="height: 52px">
+            <button class="col-2 ms-2 btn btn-primary" onclick="criarProdutos()" type="button"
+                style="width: 160px; height: 37px">
+                Adicionar Produto
+            </button>
+            <div class="col d-flex justify-content-end gap-2">
+                <button class="btn btn-danger" onclick="cancelarCompra()" type="button">Cancelar Compra</button>
+                <button class="btn btn-success" onclick="finalizarCompra()" type="button">
+                    Finalizar Compra
+                </button>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-body ">
+
+                    </div>
+                    <div class="modal-footer " id="button_confirma">
+                        <div class="col-12  d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-danger" onclick=" fecharModal() ">Cancelar</button>
+                            <button type="button" id="confirma_prod" class="btn btn-success ">Confirmar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            $('.modal-footer .btn.btn-danger').click(() => {
+                if (funcao == 'finalizar') {
+                    cancelarCompra()
+                    historico()
+
+                    $('.modal-footer .btn.btn-success').show()
+                }
+            })
+
+            $('#confirma_prod').on('click', () => {
+                // console.log($('.modal-body > div.col')[i])
+                if (funcao == 'criar') {
+                    addProdutoCesto(prodSelecionado)
+                } else {
+                    cestoDeCompra.splice(prodSelecionado, 1)
+                    ResumoCompra()
+                    listarProdutos()
+                }
+                fecharModal()
+            })
+
+        })
+
+
+
+        let prodSelecionado
+        let funcao
+        let subTotal = 0;
+        let total = 0;
+        let desconto = 0;
+        let historico = []
+
+
+
+
+        function addDarkMode() {
+            $('body').toggleClass('dark')
+            $('.modal-content, .form-text,.card').toggleClass('dark')
+
+        }
+        let produtos = [
+            {
+                nomeProduto: 'kiwi',
+                valor: 'R$14',
+                linkFoto: 'https://saude.abril.com.br/wp-content/uploads/2016/10/um-kiwi-por-semana-pelo-seu-coracao.jpg?quality=85&strip=info&w=680&h=453&crop=1'
+            },
+            {
+                nomeProduto: 'lasanha',
+                valor: 'R$12',
+                linkFoto: 'https://www.sadia.com.br/assets/images/_/products/313b9ade52f33f80dfe70b241443a90b3e0de016.png'
+
+            },
+            {
+                nomeProduto: 'paoDeQueijo',
+                valor: 'R$18',
+                linkFoto: 'http://img.sitemercado.com.br/produtos/e128cc844c9c073633ec1fc7c20c1c16a32bc34104b06448e2cd0e72780adce6_full.jpg'
+
+            }
+        ]
+        let cestoDeCompra = [
+
+        ]
+
+        function listarProdutos() {
+            $('#corpoTabela')[0].innerHTML = ""
+            for (let i = 0; i < cestoDeCompra.length; i++) {
+                $('#corpoTabela')[0].innerHTML += `
+
+                <tr  class=" border-dark border-top">
+
+                    <td class="col-1">
+                        <img class="imagem ms-1" width="40"
+                            src="${cestoDeCompra[i].linkImg}">
+                    </td>
+                    <td class=" col-1 ">
+                        <div class="input-group input-group-sm ">
+
+                            <input type="text" id="${i}" class="form-control" value="${cestoDeCompra[i].quantidade}" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </td>
+                    <td>
+                        <span class="nomeProduto">${cestoDeCompra[i].nomeProduto}</span>
+                    </td>
+                    <td>
+                        <div>
+                            <span class="valorProduto ">${cestoDeCompra[i].valor}</span>
+                            <button onclick="cancelarProduto(${i})" type="button"
+                                class="btn btn-outline-danger border-0 ms-4 ">X</button>
+                        </div>
+                    </td>
+
+                </tr>
+                `
+                modificarValores()
+
+            }
+
+
+        }
+
+        function addProdutoCesto(indiceProduto) {
+            let produto_adicionado_no_cesto = {
+                nomeProduto: produtos[indiceProduto].nomeProduto,
+                quantidade: 1,
+                valor: produtos[indiceProduto].valor,
+                linkImg: produtos[indiceProduto].linkFoto
+
+            }
+
+            cestoDeCompra.push(produto_adicionado_no_cesto)
+            fecharModal()
+            ResumoCompra()
+            listarProdutos()
+
+
+
+        }
+        function modificarValores() {
+            $(`tr input`).keyup(() => {
+                console.log(event.currentTarget)
+                if ($(event.currentTarget).val() && Number($(event.currentTarget).val()) == parseInt($(event.currentTarget).val())) {
+                    cestoDeCompra[event.currentTarget.id].quantidade = $(event.currentTarget).val()
+                    ResumoCompra()
+                }
+                $(`tr input`).change(() => {
+
+                    if ($(event.currentTarget).val() == 0) {
+                        $(event.currentTarget).val(1)
+                        cestoDeCompra[event.currentTarget.id].quantidade = 1
+
+                    }
+                    if (Number($(event.currentTarget).val()) != parseInt($(event.currentTarget).val())) {
+                        $(event.currentTarget).val(parseInt($(event.currentTarget).val()))
+                        console.log('número quebrado', parseInt($(event.currentTarget).val()))
+                        cestoDeCompra[event.currentTarget.id].quantidade = parseInt($(event.currentTarget).val())
+
+
+                    }
+                    ResumoCompra()
+                })
+
+            })
+        }
+        function produtoSelecionado() {
+            for (let i = 0; i < $('div.col').length; i++) {
+                if ($(`.modal-body > div.col`)[i] == event.currentTarget) {
+                    $(`.produto_${i}`).addClass('selecionado')
+
+                    prodSelecionado = i
+                } else {
+                    $($('.modal-body > div.col')[i]).removeClass('selecionado')
+                }
+
+            }
+
+        }
+
+        function troco(funcionalidade) {
+            if (funcionalidade == 'troco') {
+
+                let calculoTroco = 0;
+                if (cestoDeCompra.length > 0) {
+                    $('#resumoDeCompra > div:nth-child(5) input').removeAttr('readonly').focus()
+
+
+                    $('#resumoDeCompra > div:nth-child(5) input').keyup(() => {
+                        let valorPago = $('#resumoDeCompra > div:nth-child(5) input').val()
+
+                        calculoTroco = valorPago - total
+
+                        $('#resumoDeCompra > div:nth-child(6) span#erroTroco').hide()
+
+                        $('#resumoDeCompra > div:nth-child(6) input').val(calculoTroco).css('background-color', '#2f2f2f2f')
+
+                    })
+                    $('#resumoDeCompra > div:nth-child(5) input').change(() => {
+
+                        if (calculoTroco < 0) {
+
+                            $('#resumoDeCompra > div:nth-child(6) input').css('background-color', 'red')
+                            $('#resumoDeCompra > div:nth-child(6) span#erroTroco').css('font-weight', 'bold').text('valor de troco negativo').slideDown()
+                            $('div.d-flex:nth-child(2) > button:nth-child(2)').attr('disabled', true)
+
+                        } else {
+                            $('div.d-flex:nth-child(2) > button:nth-child(2)').attr('disabled', false)
+                        }
+
+                    })
+                }
+            } else {
+
+
+                let totaldaCompraComDesconto = 0
+                if (cestoDeCompra.length > 0) {
+                    $('#resumoDeCompra > div:nth-child(3) input').removeAttr('readonly').focus()
+
+                    $('#resumoDeCompra > div:nth-child(3) input').val('').css('background-color', '#2f2f2f2f')
+
+                    $('#resumoDeCompra > div:nth-child(3) input').keyup(() => {
+
+                        desconto = Number($('#resumoDeCompra > div:nth-child(3) input').val())
+
+                        $('#resumoDeCompra > div:nth-child(3) input').css('background-color', '#2f2f2f2f')
+
+                        totaldaCompraComDesconto = subTotal - desconto
+
+
+                        if (totaldaCompraComDesconto >= 0) {
+
+                            $('#inputTotal').val(totaldaCompraComDesconto)
+
+                        }
+
+
+                    })
+                    $('#resumoDeCompra > div:nth-child(3) input').change(() => {
+
+                        if (totaldaCompraComDesconto < 0) {
+                            console.log('apertando desconto -0')
+                            $('#resumoDeCompra > div:nth-child(3) input').css('background-color', 'red').val('desconto com o valor negativo').attr('readonly', 'true')
+                            $('#inputTotal').val(total)
+                        } else {
+                            total = totaldaCompraComDesconto
+                            $('#resumoDeCompra > div:nth-child(3) input').val("")
+                        }
+
+                    })
+                }
+
+            }
+
+
+
+
+        }
+        function finalizarCompra() {
+            console.log('chamado')
+            funcao = 'finalizar'
+            abrirModal()
+            //  $('.btn.btn-danger').text('fechar')
+            $('.modal-footer .btn.btn-success').hide()
+            $('.modal-body').removeClass('row row-cols-3 gx-1')
+
+            $('.modal-body')[0].innerHTML = `
+            <div class="row">
+                <div class="col" >
+                    <p> parabens pela compra !!! </p>
+                </div>
+            </div>
+            `
+
+
+
+        }
+
+        function ResumoCompra() {
+            let total_temp = 0
+
+            for (let i = 0; i < cestoDeCompra.length; i++) {
+                total_temp += Number(cestoDeCompra[i].valor.replace('R$', "") * cestoDeCompra[i].quantidade)
+
+            }
+            subTotal = total_temp
+            total = subTotal - desconto
+            $('#inputTotal').val(total)
+            $('#inputSubTotal').val(subTotal)
+
+
+        }
+
+        function criarProdutos() {
+            funcao = 'criar'
+            $('.modal-body')[0].innerHTML = ""
+            for (let i = 0; i < produtos.length; i++) {
+                $('.modal-body').addClass('row row-cols-3 gx-1')
+                $('.modal-body')[0].innerHTML += (
+                    `<div align="center" class="col produto_${i}" onclick="produtoSelecionado()">
+                        <div id="produto${i + 1}">
+                            <img class="imagem ms-1" width="110"
+                                src="${produtos[i].linkFoto}">
+                        </div>
+
+                        <P class="mb-0">${produtos[i].nomeProduto}</P>
+                        <p>${produtos[i].valor}</p>
+
+                    </div>`
+                )
+
+            }
+            abrirModal()
+        }
+
+        function cancelarProduto(indiceProduto) {
+            funcao = 'cancelar'
+            $('.modal-body').removeClass('row row-cols-3 gx-1')
+            $('.modal-body')[0].innerHTML = `
+            <div class="row">
+                <div class="col" >
+                    <p> deseja cancelar o item ? </p>
+                </div>
+            </div>
+            `
+            prodSelecionado = indiceProduto
+            abrirModal()
+
+        }
+        // $(document).ready(abrirModal)
+        function cancelarCompra() {
+            cestoDeCompra = []
+            $('#inputSubTotal').val("")
+            $('#inputTotal').val("")
+            $('#resumoDeCompra > div:nth-child(5) input').val("")
+            $('#resumoDeCompra > div:nth-child(3) input').val("")
+            $('#resumoDeCompra > div:nth-child(6) input').val("")
+
+            subTotal = 0;
+            total = 0;
+            desconto = 0;
+            listarProdutos()
+
+        }
+        function abrirModal() {
+            $('#exampleModal').modal('show')
+
+        }
+        function fecharModal() {
+            $('#exampleModal').modal('hide')
+        }
+        function historico() {
+            $('#historico')[0].innerHTML =
+                <table class="table  table-borderless bg-white  ">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Nome do produto</th>
+                            <th scope="col" class="col-2">Valor do produto</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="corpoTabela">
+
+
+
+                    </tbody>
+                </table>
+        }
+
+
+    </script>
+</body>
+
+</html>
