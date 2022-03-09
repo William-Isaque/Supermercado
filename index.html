@@ -161,7 +161,7 @@
             $('.modal-footer .btn.btn-danger').click(() => {
                 if (funcao == 'finalizar') {
                     cancelarCompra()
-                    historico()
+                    // historico()
 
                     $('.modal-footer .btn.btn-success').show()
                 }
@@ -487,27 +487,27 @@
         function fecharModal() {
             $('#exampleModal').modal('hide')
         }
-        function historico() {
-            $('#historico')[0].innerHTML =
-                <table class="table  table-borderless bg-white  ">
-                    <thead>
-                        <tr>
-                            <th scope="col"> </th>
-                            <th scope="col">Quantidade</th>
-                            <th scope="col">Nome do produto</th>
-                            <th scope="col" class="col-2">Valor do produto</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="corpoTabela">
-
-
-
-                    </tbody>
-                </table>
-        }
-
+      /*  function historico() {
+                $('#historico')[0].innerHTML =`
+                    <table class="table  table-borderless bg-white  ">
+                        <thead>
+                            <tr>
+                                <th scope="col"> </th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Nome do produto</th>
+                                <th scope="col" class="col-2">Valor do produto</th>
+                            </tr>
+    
+                        </thead>
+    
+                        <tbody id="corpoTabela">
+    
+    
+    
+                        </tbody>
+                    </table>
+            }
+    */
 
     </script>
 </body>
